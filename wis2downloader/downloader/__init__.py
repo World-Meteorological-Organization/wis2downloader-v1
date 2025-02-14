@@ -167,12 +167,7 @@ class DownloadWorker(BaseDownloader):
 
         # Standardise the file type label, defaulting to 'other'
         all_type_labels = ['bufr', 'grib', 'json', 'xml', 'png']
-        file_type_label = 'other'
-
-        for label in all_type_labels:
-            if label in file_type:
-                file_type_label = label
-                break
+        file_type_label = file_type if file_type in all_type_labels else 'other'
 
         # Start timer of download time to be logged later
         download_start = dt.now()
