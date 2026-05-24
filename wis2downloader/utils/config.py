@@ -31,3 +31,5 @@ def load_config():
         raise RuntimeError(e)
 
     return _config
+
+CONFIG = load_config()

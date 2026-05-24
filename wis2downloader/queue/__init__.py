@@ -55,9 +55,18 @@ class QMonitor:
 
 
 class SimpleQueue(BaseQueue):
-    def __init__(self):
-        self._queue = Queue()
+    def __init__(self, maxsize=10000):
+        """
+        Initialize SimpleQueue with a size limit to prevent unbounded memory growth.
+
+        Args:
+            maxsize: Maximum number of items allowed in the queue.
+                     Default is 10000. Set to 0 for unlimited (not recommended).
+        """
+        self._queue = Queue(maxsize=maxsize)
         self.active = True
+        self.maxsize = maxsize
+        LOGGER.info(f"SimpleQueue initialized with maxsize={maxsize}")
 
     def enqueue(self, item):
         self._queue.put(item)

@@ -26,8 +26,8 @@ setup_logger(loglevel=CONFIG['log_level'],
              save=CONFIG['save_logs'],
              log_path=CONFIG['log_path'])
 
-# Create the queue
-jobQ = SimpleQueue()
+# Create the queue with configurable max size to prevent unbounded memory growth
+jobQ = SimpleQueue(maxsize=CONFIG.get('queue_maxsize', 10000))
 
 # Now set up the different threads
 # 2) download workers
